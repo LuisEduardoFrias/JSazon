@@ -1,0 +1,47 @@
+:root {
+  --bg: #ffffff;
+  --bg2: #f70000;
+  --bg3: #ffba02;
+  --br: 2px;
+  --bw: 2px;
+  --bc: #f70000;
+  --bch: #a10000;
+  
+}
+
+* {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100dvh;
+  max-width: 100dvw;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+button {
+  height: 25px;
+  width: 100px;
+  cursor: pointer;
+  border-color: var(--bc);
+  border-radius: Calc(var(--br) + 3px);
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:hover {
+  border-color: var(--bch);
+}
+
+button:active {
+  transform: scale(0.9);
+}
