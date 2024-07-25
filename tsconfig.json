@@ -21,7 +21,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "cp/*": ["./src/components/*"],
+      "ct/*": ["./src/controllers/*"],
       "md/*": ["./src/models/*"],
+      "dtos/*": ["./src/dtos/*"],
       "sv/*": ["./src/services/*"],
       "st/*": ["./src/styles/*"],
       "hp/*": ["./src/helpers/*"],

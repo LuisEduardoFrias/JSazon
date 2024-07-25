@@ -19,7 +19,10 @@ const Menu = forwardRef(function Menu(props, ref) {
                 ${showVerify.obj.price}.00"</b></i> a la factura?
             </span>
             <div>
-              <button onClick={() => setShowVerify({ show: false })}>
+              <button onClick={() => setShowVerify({
+                show: false,
+                obj: showVerify.obj
+              })}>
                 Agregar
               </button>
               <button onClick={() => setShowVerify({ show: false })}>

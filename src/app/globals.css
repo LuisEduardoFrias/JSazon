@@ -45,3 +45,8 @@ button:hover {
 button:active {
   transform: scale(0.9);
 }
+
+/** SVG **/
+body #form-load-svg {
+  fill: black;
+}

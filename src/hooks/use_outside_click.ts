@@ -21,12 +21,12 @@ export default function useOutsideClick(callback: () => void, count: number) {
         for (let i = 0; i < countRef; i++) {
           const ref = elementRef.current[i];
 
-          if (ref.current && !ref.current.contains(e.target)) {
+          if (ref.current && ref.current.contains(e.target)) {
             contains[i] = true;
           }
         }
 
-        if (!contains.every(field => field === false))
+        if (contains.every(field => field === false))
           callback();
       }
       else if (!elementRef.current.contains(e.target)) {

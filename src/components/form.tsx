@@ -1,5 +1,6 @@
 "use client"
-import React, { ReactChildren } from 'react';
+import React, { ReactChildren, useState } from 'react';
+import Loading from 'cp/loading'
 import { v4 as uuidv4 } from 'uuid';
 
 function create<Type>(c: { new(): Type }): Type {
@@ -18,6 +19,7 @@ interface Props<T extends Canbenew<T>> {
 }
 
 export default function Form<T extends canbenew<T>>({ children, textBtn, onService }: Props<T>) {
+  const [loading, setLoading] = useState(false);
 
   function validateError(children: React.ReactNode, isError: boolean): boolean {
 
@@ -68,8 +70,11 @@ export default function Form<T extends canbenew<T>>({ children, textBtn, onServi
     return isError;
   }
 
-  function handlerSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handlerSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    setLoading(true)
+
     const formData = new FormData(event.target);
 
     const formDataObject = {};
@@ -81,11 +86,14 @@ export default function Form<T extends canbenew<T>>({ children, textBtn, onServi
     isError = validateError(event.target.children, isError);
 
     if (!isError)
-      onService(formDataObject as T);
+      await onService(formDataObject as T);
+
+    setLoading(false)
   }
 
   return (
     <form onSubmit={handlerSubmit}>
+      {loading && <Loading id='form-load-svg' />}
       {children}
       <button>{textBtn ?? "Send"}</button>
     </form>

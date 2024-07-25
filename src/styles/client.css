@@ -1,0 +1,16 @@
+/***/
+.container-client {
+  padding-block-start: 20px;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+  >span {
+    position: absolute;
+    top: -20px;
+    font-weight: 500;
+    font-size: 18px;
+    width: 100%;
+  }
+}

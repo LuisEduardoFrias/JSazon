@@ -2,11 +2,12 @@
 "use client"
 import useStore from "str/store";
 import Cronos from 'hp/cronos'
-import TFoodBill, { TFood } from 'md/food'
+import BillDtos from "dtc/bill_dtos"
+import FoodDtos from "dtc/food_dtos"
 import AddSvg from 'svg/add_svg'
 import 'st/card.css'
 
-export default function Card({ data }: { data: TFoodBill }) {
+export default function Card({ data, rol }: { data: BillDtos, rol: string }) {
   const changeShowMenu = useStore((state) => state.changeShowMenu);
   const cronos = new Cronos();
 
@@ -24,14 +25,14 @@ export default function Card({ data }: { data: TFoodBill }) {
         <span>
           {cronos.format(data.date)}
         </span>
-        {cronos.isEqualDates(data.date) &&
+        {(rol === "admin" && !data.paid && cronos.isEqualDates(data.date)) &&
           <button className="add-btn" onClick={() => changeShowMenu(true)}>
             <AddSvg />
           </button>
         }
       </div>
       <div className="body">
-        {data.foods.map((food: TFood, index: number) =>
+        {data.foods.map((food: FoodDtos, index: number) =>
           <div key={index}>
             <div>
               <span>
@@ -57,7 +58,7 @@ export default function Card({ data }: { data: TFoodBill }) {
           Total:
         </span>
         <span>
-          ${data.foods.map(o => o.price).reduce((ps, p) => ps + p)}.00
+          ${data.totalInvoiceCost}.00
         </span>
       </div>
     </div>
