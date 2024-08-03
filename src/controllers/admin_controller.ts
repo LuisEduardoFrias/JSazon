@@ -14,7 +14,7 @@ export default class AdminController {
       return { error: "error: al octener os bill", data: null };
     }
 
-    const billFind: Bill = data.filter(c => e.rol ==="client");
+    const billFind: Bill = data.filter(c => c.rol === "client");
 
     const bills = billFind.map(bf => new BillDto(bf.date, bf.foods, bf.paid));
 

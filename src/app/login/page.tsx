@@ -34,18 +34,18 @@ export default function Login() {
           <label>
             Usuario
             <input id="user" name="user" placeholder="Ejemplo: Juan sazon" />
-            <Span
-              htmlFor="user"
-              required="Se requiere este campo. *"
-              minlength={[4, "Su usurio debe tener almenos 4 caracteres"]} />
-          </label>
+              <Span
+                htmlFor="user"
+                required="Se requiere este campo. *"
+                minlength={[4, "Su usurio debe tener almenos 4 caracteres"]} />
+            </label>
           <label>
             Contraseña
             <input id="password" name="password" placeholder="*************" type="password" />
             <Span
               htmlFor="password"
-              required="Se requiere este campo. *"
-              minlength={[8, "Su contraseña debe tener almenos 8 caracteres"]} />
+              required="This field is required."
+              minlength={[8, "This field must be at least 8 characters."]} />
           </label>
         </Form>
       </main >

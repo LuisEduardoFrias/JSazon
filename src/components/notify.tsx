@@ -1,7 +1,5 @@
 
 export default function Notify() {
-
-
   return (
     <div style={container_notify}>
       <h1>notify</h1>
@@ -10,7 +8,7 @@ export default function Notify() {
 }
 
 const container_notify = {
-  visibility:"hidden",
+  visibility: "hidden",
   width: "100dvw",
   heigth: "100px",
   position: "absolute",

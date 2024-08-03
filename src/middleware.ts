@@ -4,7 +4,6 @@ import type { NextRequest } from 'next/server'
 import { jwtVerify } from 'jose'
 
 export async function middleware(request: NextRequest) {
-  //  return NextResponse.next();
   const jwt = request.cookies.get('access_token');
 
   if (jwt === undefined) {

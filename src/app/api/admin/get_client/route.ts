@@ -7,10 +7,9 @@ export function GET(res: Request) {
   const token = cookieStore.get('token')
   console.log(token)
 
-  const { error, data } = BillController.get(id)
+  const { error, data } = AdminController.getClients()
 
   return Response.json({ error, data }, {
     status: 200
   })
-  return Response.json({ error: null, data: "Okey" }, { status: 200 })
 }

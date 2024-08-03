@@ -5,14 +5,13 @@ export function GET(req: Request) {
 
   const cookieStore = cookies()
   const token = cookieStore.get('token')
-  console.log(token)
-
+  
   const { searchParams } = new URL(req.url)
   const id = searchParams.get('id')
 
   const { error, data } = BillController.get(id)
 
-  return Response.json({error, data}, {
+  return Response.json({ error, data }, {
     status: 200
   })
 }

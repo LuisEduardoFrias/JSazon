@@ -22,17 +22,24 @@ export default async function Fetch(datafetch: DataFetch) {
   return await _fetch(datafetch)
     .then((response) => {
       if (!response.ok) {
-        console.error('Error retrieving data.');
-        return { error: 'Error retrieving data.', data: null };
+        console.error('Error retrieving data .');
+        const re =
+        {
+          status: response.status,
+          text: response.statusText,
+          error: response.error(),
+        }
+
+        return { error: JSON.stringify(re), data: null };
       }
 
       const contentType = response.headers.get('content-type');
 
-       if (contentType && contentType.includes('application/json')) {
-         return response.json();
-       } else {
-         return response.text();
-       }
+      if (contentType && contentType.includes('application/json')) {
+        return response.json();
+      } else {
+        return response.text();
+      }
     })
     .then((data) => data)
     .catch((error) => {
