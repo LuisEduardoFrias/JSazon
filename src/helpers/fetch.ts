@@ -18,9 +18,12 @@ export type DataFetch = {
   token?: string
 };
 
-export default async function Fetch(datafetch: DataFetch) {
+export default async function Fetch(datafetch: DataFetch)
+{
+
   return await _fetch(datafetch)
     .then((response) => {
+      
       if (!response.ok) {
         console.error('Error retrieving data .');
         const re =
