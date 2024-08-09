@@ -1,5 +1,6 @@
 //
 import daj, { Token } from 'dajts'
+import BillController from 'ct/bill_controller'
 import ClientDto from 'dtos/client_dtos'
 import User from 'md/user'
 
@@ -14,10 +15,21 @@ export default class AdminController {
       return { error: "error: al octener os bill", data: null };
     }
 
-    const billFind: Bill = data.filter(c => c.rol === "client");
+    const clients: ClientDtos = data.filter(c => c.rol === "client");
 
-    const bills = billFind.map(bf => new BillDto(bf.date, bf.foods, bf.paid));
+    const clientsDtos = clients.map(cl => {
+      const { data: bills } = BillController.get(cl.key, null, true);
 
-    return { error: null, data: bills };
+      let totalDebt = 0;
+
+      if (bills) {
+        console.log('bills: ', bills)
+        totalDebt = bills.reduce((ab, bill) => ab + bill.totalInvoiceCost, 0)
+      }
+
+      return new ClientDto(cl.key, cl.userName, cl.alias, totalDebt)
+    });
+
+    return { error: null, data: clientsDtos };
   }
 }

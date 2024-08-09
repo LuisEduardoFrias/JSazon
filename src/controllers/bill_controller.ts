@@ -6,7 +6,7 @@ import Bill from 'md/bill'
 
 export default class BillController {
 
-  static get(userId: string) {
+  static get(userId: string, month?: number | null, isntPay: boolean = false) {
 
     const { error, data } = daj.getSync(Bill.getInstance());
 
@@ -17,11 +17,18 @@ export default class BillController {
 
     const billFind: Bill = data.filter(u => {
       const date = Cronos.parseDate(u.date)
-      const nowDate = new Cronos();
+
+      if (isntPay) {
+        if (u.client === userId && u.paid === false) {
+          return true;
+        }
+      }
+
+      const newDate = new Cronos();
 
       if (u.client === userId &&
-        date.year === nowDate.year &&
-        date.month === nowDate.month) {
+        date.year === newDate.year &&
+        date.month >= month && newDate.month) {
         return true;
       }
     });

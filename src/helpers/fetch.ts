@@ -18,22 +18,20 @@ export type DataFetch = {
   token?: string
 };
 
-export default async function Fetch(datafetch: DataFetch)
-{
+export default async function Fetch(datafetch: DataFetch) {
 
   return await _fetch(datafetch)
     .then((response) => {
-      
+
       if (!response.ok) {
-        console.error('Error retrieving data .');
-        const re =
-        {
+        const error = {
           status: response.status,
-          text: response.statusText,
-          error: response.error(),
+          error: response.statusText
         }
 
-        return { error: JSON.stringify(re), data: null };
+        console.error('Error: ', error);
+
+        return { error, data: null };
       }
 
       const contentType = response.headers.get('content-type');
@@ -46,7 +44,7 @@ export default async function Fetch(datafetch: DataFetch)
     })
     .then((data) => data)
     .catch((error) => {
-      console.log('helper fetch: ', error);
+      console.log('Error: ', error);
       return { error, data: null }
     })
 }

@@ -1,7 +1,9 @@
 
-export default class ClientDtos{
-  constructor(name:string, totalDebt:string){
+export default class ClientDtos {
+  constructor(key: string, name: string, alias: string | null, totalDebt: string) {
+    this.key = key;
     this.name = name;
-    this.totalDebt= totalDebt;
+    this.alias = alias;
+    this.totalDebt = totalDebt;
   }
 }

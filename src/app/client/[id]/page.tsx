@@ -1,5 +1,5 @@
-//
-"use client"
+'use client'
+import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import BillDtos from "dtc/bill_dtos"
 import SGetBills from 'sv/bill'
@@ -8,21 +8,23 @@ import Loading from 'cp/loading'
 import Card from 'cp/card'
 import 'st/client.css'
 
-export default function Client({ session }: { session: UserDto }) {
+export default function ClientDetailt() {
+  const params = useParams();
+
   const [bills, setbills] = useState(null)
 
   useEffect(() => {
-    if (session)
-      (async () => {
-        const { error, data } = await SGetBills(session.key)
+    (async () => {
+      const { error, data } = await SGetBills(params.id)
 
-        if (error) {
-          alert("Home, error: " + JSON.stringify(error))
-        }
+      if (error) {
+        alert("Home, error: " + JSON.stringify(error))
+      }
 
-        setbills(data)
-      })();
-  }, [session])
+      setbills(data)
+    })();
+  }, [])
+
 
   const total = !bills ? 0 :
     bills.length > 0 ?
@@ -41,16 +43,17 @@ export default function Client({ session }: { session: UserDto }) {
           bills.length > 0 ?
             [...bills]?.reverse().map((obj: BillDtos, index: number) =>
               <Card key={index} data={obj} rol={"client"} />) :
-              <div style={{
-                marginBlockStart: "15px", width: "100%",
-                textAlign: "center", fontWeight: "700",
-                fontSize: "28px"
-              }}>
-                <span>Sin facturas</span>
-              </div>
+            <div style={{
+              marginBlockStart: "15px", width: "100%",
+              textAlign: "center", fontWeight: "700",
+              fontSize: "28px"
+            }}>
+              <span>Sin facturas</span>
+            </div>
           :
           <Loading />
       }
     </div>
   )
+
 }
