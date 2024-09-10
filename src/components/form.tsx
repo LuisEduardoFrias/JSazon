@@ -3,10 +3,6 @@ import React, { ReactChildren, useState } from 'react';
 import Loading from 'cp/loading'
 import { v4 as uuidv4 } from 'uuid';
 
-function create<Type>(c: { new(): Type }): Type {
-  return new c();
-}
-
 enum errorType {
   required = "required",
   minlength = "minlength",
@@ -137,8 +133,4 @@ export function Span({ id, htmlFor, select, required, minlength, className = "" 
     data-required={required}
     data-minlength={minlength}
   ></span >)
-}
-
-function removeDoubleDot(id: string): string {
-  return id.replace(':', '').replace(':', '');
 }
